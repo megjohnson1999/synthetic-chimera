@@ -1,0 +1,37 @@
+# Example configuration for chimera simulator
+# This file demonstrates all available configuration options
+
+assembly:
+  total_contigs: 1000
+  chimera_percentage: 0.15  # 15% of contigs will be chimeric
+  normal_contig_length_range: [500, 5000]
+  chimeric_contig_length_range: [1000, 8000]
+
+chimera_types:
+  gap_mediated: 0.4      # 40% of chimeras - clear insert size jumps
+  orientation_flip: 0.3   # 30% of chimeras - improper pair orientations  
+  distant_join: 0.3       # 30% of chimeras - extreme insert sizes
+
+coverage:
+  samples: 5                           # Simulate 5 different samples
+  base_coverage_range: [0.1, 500.0]   # Coverage range across samples
+  distribution: "log_normal"           # Coverage distribution type
+  coverage_correlation: 0.0            # Independence from chimera status
+
+read_simulation:
+  coverage_target: 100.0    # Target average coverage
+  read_length: 150          # Read length in bp
+  insert_size_mean: 300     # Mean insert size
+  insert_size_std: 50       # Insert size standard deviation
+  error_rate: 0.01          # Sequencing error rate
+  quality_profile: "illumina"
+
+mapping:
+  aligner: "bwa_mem"        # Options: "bwa_mem", "minimap2"
+  threads: 4                # Number of threads for mapping
+  min_mapping_quality: 10   # Minimum mapping quality
+
+validation:
+  min_mapping_rate: 0.85              # Minimum acceptable mapping rate
+  insert_size_outlier_threshold: 3.0  # Standard deviations for outliers
+  orientation_artifact_threshold: 0.05 # Fraction of improper pairs
